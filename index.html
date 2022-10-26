@@ -4,17 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Meme Gen</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
     <header class="header">
-        <button></button>
+        <h2 class="logo">Meme Generator</h2>
+        <div class="nav">
+            <button>Img Gallery</button>
+            <button onclick="onGallery(true)">Gallery</button>
+            <button>About</button>
+        </div>
     </header>
 
-    <section class="gallery"></section>
-    <section class="editor"></section>
+    <section class="gallery">
+        <div class="gallery-features"></div>
+        <div class="imgs-container">
+
+        </div>
+    </section>
+
+    <section class="meme-editor hide">
+        <div class="canvas-container">
+            <canvas width="500" height="500"></canvas>
+        </div>
+        <div class="meme-features">
+            <input type="text" oninput="onSetLineTxt(this.value)">
+            <input type="color" onchange="onChangeColor(this.value)">
+            <button onclick="onChangeFontSize(1)">A+</button>
+            <button onclick="onChangeFontSize(-1)">A-</button>
+            <button onclick="onChangeLine()">↕</button>
+        </div>
+    </section>
     
 
     <script src="js/service/memeService.js"></script>

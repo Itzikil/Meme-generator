@@ -1,0 +1,36 @@
+body{
+    background-color: #1f1f1f;
+}
+
+.header{
+    background-color: #1fab93;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 30px;
+    margin-bottom: 20px;
+}
+.logo{
+    padding-left: 20px;
+}
+.nav{
+    padding-right: 20px;
+    display: flex;
+    gap: 10px;
+}
+canvas{
+    background-color: aliceblue;
+}
+.meme-editor{
+    display: flex;
+    gap: 50px;
+}
+
+.gallery-imgs{
+    width: 150px;
+    height: 150px;
+}
+
+.hide{
+    display: none;
+}
