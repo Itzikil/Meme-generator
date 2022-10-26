@@ -17,7 +17,6 @@ html {
 
 body {
     background-color: #1f1f1f;
-    overflow-y: hidden;
 }
 
 /* Helpers */
@@ -188,9 +187,11 @@ canvas {
 
 .text-input {
     background-color: #ebeef3;
+    color: black;
     border-radius: 20px;
     width: 100%;
     flex-grow: 1;
+    padding-inline: 20px;
 }
 
 .text-setting {
@@ -256,6 +257,17 @@ canvas {
     background-color: #8f44bb;
 }
 
+.share{
+    background-color: #211b77;
+
+}
+
 .hide {
     display: none;
+}
+
+@media (max-width: 800px) {
+    .gallery-features {
+        flex-direction: column;
+    }
 }
