@@ -78,3 +78,8 @@ function changeLine(){
     currLine = gMeme.lines[gMeme.selectedLineIdx]
     renderMeme(gMeme.lines)
 }
+
+function alignText(align){
+    currLine.align = align
+    renderMeme(gMeme.lines)
+}

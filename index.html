@@ -21,7 +21,7 @@
     <section class="gallery">
     
         <div class="gallery-features">
-            <input class="btn search feature" type="text" placeholder="Search">
+            <input class="btn search feature input" type="text" placeholder="Search">
             <div class="tags feature btn">Funny animal Men Women comic smile</div>
             <button class="btn more-btn feature">More</button>
         </div>
@@ -35,18 +35,28 @@
             <canvas width="500" height="500"></canvas>
         </div>
         <div class="meme-features">
-            <input class="btn text-input" type="text" oninput="onSetLineTxt(this.value)">
-            <div class="text-setting radius-border">
-                <button onclick="onChangeLine()">↕</button>
+            <input class="btn text-input input" type="text" oninput="onSetLineTxt(this.value)">
+            <div class="text-setting border-radius">
+                <button class="btn text-btn" onclick="onChangeLine()">↕</button>
+                <button class="btn text-btn" >╋</button>
+                <button class="btn text-btn" >↕</button>
             </div>
-            <div class="text-featers radius-border">
-                <input class="btn text-btn" type="color" onchange="onChangeColor(this.value)">
+            <div class="text-featers border-radius">
                 <button class="btn text-btn" onclick="onChangeFontSize(1)">A+</button>
                 <button class="btn text-btn" onclick="onChangeFontSize(-1)">A-</button>
+                <button class="btn text-btn" onclick="onAlignText('left')">⇽</button>
+                <button class="btn text-btn" onclick="onAlignText('center')">≡</button>
+                <button class="btn text-btn" onclick="onAlignText('right')">⇾</button>
+                <input class="btn text-btn" type="color" onchange="onChangeColor(this.value)">
             </div>
-            <div class="smile">:)</div>
-            <div class="download">
-                <a href="#" class="btn download radius-border">Download</a>
+            <div class="smile border-radius">:)</div>
+            <div class="down-up-load">
+                <a href="#" class="btn download border-radius" download="new-meme.jpg" onclick="downloadMeme(this)">Download</a>
+
+                <label for="file-upload" class="btn upload">
+                    Upload image
+                    <input type="file" id="file-upload" class="file-input" name="image" onchange="onImgInput(event)" hidden/>
+                </label>
             </div>
         </div>
     </section>

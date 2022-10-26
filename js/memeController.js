@@ -62,3 +62,13 @@ function onChangeFontSize(size) {
 function onChangeLine() {
     changeLine()
 }
+
+function onAlignText(align){
+    alignText(align)
+}
+
+function downloadMeme(elLink) {
+    console.log(elLink);
+    const imgContent = gElCanvas.toDataURL()
+    elLink.href = imgContent
+}

@@ -1,6 +1,11 @@
-:root{
+:root {
     --clr1: linear-gradient(130deg, #17a2a4 30%, #2bb67d 100%);
 }
+
+* {
+    box-sizing: border-box;
+}
+
 @font-face {
     font-family: Poppins;
     src: url(/font/Poppins-Medium.ttf);
@@ -28,9 +33,18 @@ body {
     cursor: pointer;
 }
 
-.radius-border{
+.border-radius {
     border-radius: 30px;
 }
+
+a {
+    text-decoration: none;
+}
+
+.input{
+    cursor: auto;
+}
+
 
 /* header */
 
@@ -66,33 +80,37 @@ body {
     margin-bottom: 200px;
 }
 
-.gallery-features{
+.gallery-features {
     display: flex;
     padding-left: 20px;
     /* padding-left: 20px; */
     padding-block: 40px;
     gap: 20px;
 }
-.feature{
+
+.feature {
     border-radius: 30px;
     height: 60px;
 }
-.search{
+
+.search {
     background-color: #22252e;
-    padding-inline:50px ;
+    padding-inline: 50px;
     flex-grow: 5;
     /* opacity: 0.380; */
 }
-.tags{
+
+.tags {
     background-color: #88898d;
-    padding-inline:30px ;
+    padding-inline: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-grow: 5;
     /* gap: ; */
 }
-.more-btn{
+
+.more-btn {
     background: var(--clr1);
     font-weight: 300;
     font-size: 1.15em;
@@ -100,10 +118,12 @@ body {
     flex-grow: 1;
     align-self: flex-end;
 }
+
 .gallery-imgs {
     width: 175px;
     height: 175px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .imgs-container {
@@ -149,7 +169,11 @@ canvas {
     border: 6px solid #34373e;
 }
 
-.meme-features{
+/* .meme-editor > * .btn{
+    border-radius: 10px;
+} */
+
+.meme-features {
     background-color: #34373e;
     border-radius: 10px;
     width: 500px;
@@ -158,35 +182,78 @@ canvas {
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    padding-inline: 40px ;
+    padding-inline: 40px;
+    padding-block: 30px;
 }
 
-.text-input{
-    margin-top: 20px;
+.text-input {
     background-color: #ebeef3;
     border-radius: 20px;
     width: 100%;
+    flex-grow: 1;
 }
 
-.text-featers{
-    background-color:#19a59f;
+.text-setting {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-grow: 1;
+}
+
+.text-setting>* {
+    border-radius: 10px;
+    width: 50px;
+}
+
+.text-featers {
+    background-color: #19a59f;
     width: 100%;
-    padding-inline: 15px;
+    padding-inline: 20px;
     padding-block: 10px;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 30px;
+    flex-grow: 3;
 }
 
-.text-featers > * {
+.text-featers>* {
     border-radius: 10px;
+    width: 12%;
+    height: 33%;
 }
 
-.smile{
+.smile {
     background-color: white;
+    width: 100%;
+    flex-grow: 2;
+    text-align: center
 }
-.text-btn{
+
+.text-btn {
     background-color: white;
     color: black;
+}
+
+.down-up-load {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.down-up-load>* {
+    border-radius: 10px;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.download {
+    background-color: #1e7cd3;
+}
+
+.upload {
+    background-color: #8f44bb;
 }
 
 .hide {
