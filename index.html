@@ -12,14 +12,19 @@
     <header class="header">
         <h2 class="logo">Meme Generator</h2>
         <div class="nav">
-            <button>Img Gallery</button>
-            <button onclick="onGallery(true)">Gallery</button>
-            <button>About</button>
+            <!-- <button class="btn">Img Gallery</button> -->
+            <button class="btn" onclick="onGallery(true)">Gallery</button>
+            <button class="btn">About</button>
         </div>
     </header>
 
     <section class="gallery">
-        <div class="gallery-features"></div>
+    
+        <div class="gallery-features">
+            <input class="btn search feature" type="text" placeholder="Search">
+            <div class="tags feature btn">Funny animal Men Women comic smile</div>
+            <button class="btn more-btn feature">More</button>
+        </div>
         <div class="imgs-container">
 
         </div>
@@ -30,11 +35,19 @@
             <canvas width="500" height="500"></canvas>
         </div>
         <div class="meme-features">
-            <input type="text" oninput="onSetLineTxt(this.value)">
-            <input type="color" onchange="onChangeColor(this.value)">
-            <button onclick="onChangeFontSize(1)">A+</button>
-            <button onclick="onChangeFontSize(-1)">A-</button>
-            <button onclick="onChangeLine()">↕</button>
+            <input class="btn text-input" type="text" oninput="onSetLineTxt(this.value)">
+            <div class="text-setting radius-border">
+                <button onclick="onChangeLine()">↕</button>
+            </div>
+            <div class="text-featers radius-border">
+                <input class="btn text-btn" type="color" onchange="onChangeColor(this.value)">
+                <button class="btn text-btn" onclick="onChangeFontSize(1)">A+</button>
+                <button class="btn text-btn" onclick="onChangeFontSize(-1)">A-</button>
+            </div>
+            <div class="smile">:)</div>
+            <div class="download">
+                <a href="#" class="btn download radius-border">Download</a>
+            </div>
         </div>
     </section>
     

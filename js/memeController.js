@@ -15,20 +15,30 @@ function onSetLineTxt(text) {
     setLineTxt(text)
 }
 
-function renderMeme(line, img) {
+function renderMeme(lines, img) {
     if (img) {
         onGallery(false)
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
         currImg = img
-    }else gCtx.drawImage(currImg, 0, 0, gElCanvas.width, gElCanvas.height)
+    } else gCtx.drawImage(currImg, 0, 0, gElCanvas.width, gElCanvas.height)
+    
+    
+    let align 
+    let height = 50
+    lines.forEach(line => {
+        let text = line.txt
+        gCtx.font = line.size + 'px Arial'
+        gCtx.fillStyle = line.color //both?
+        gCtx.strokeStyle = line.color //both?
 
-    let text = line.txt
-    gCtx.font = line.size + 'px Arial'
-    gCtx.fillStyle = line.color //both?
-    gCtx.strokeStyle = line.color //both?
-
-    gCtx.fillText(text, 10,50) //both?
-    gCtx.strokeText(text, 10, 50) //both?
+        if(line.align === 'left') align = 10
+        else if(line.align === 'center') align = gElCanvas.width / 2
+        else align = gElCanvas.width - 10
+        
+        gCtx.fillText(text, align, height) //both?
+        gCtx.strokeText(text, align, height) //both?
+        height+= 400
+    })
 }
 
 function onGallery(gallery) {
@@ -41,14 +51,14 @@ function onGallery(gallery) {
     }
 }
 
-function onChangeColor(color){
+function onChangeColor(color) {
     changeColor(color)
 }
 
-function onChangeFontSize(size){
+function onChangeFontSize(size) {
     changeFontSize(size)
 }
 
-function onChangeLine(){
+function onChangeLine() {
     changeLine()
 }
