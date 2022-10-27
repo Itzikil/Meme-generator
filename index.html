@@ -7,7 +7,7 @@
     <title>Meme Gen</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
+<body onload="onInit()">
 
     <header class="header">
         <h2 class="logo">Meme Generator</h2>
@@ -21,8 +21,12 @@
     <section class="gallery">
     
         <div class="gallery-features">
-            <input class="btn search feature input" type="text" placeholder="Search">
-            <div class="tags feature btn">Funny animal Men Women comic smile</div>
+            <form class="search-form" action="" onsubmit="onSearch(event)">
+                <datalist id="search">
+                </datalist>
+                <input class="btn search feature input" type="text" placeholder="Search" list="search" >
+            </form>
+            <div class="tags-display feature btn"></div>
             <button class="btn more-btn feature">More</button>
         </div>
         <div class="imgs-container">
@@ -37,19 +41,30 @@
         <div class="meme-features">
             <input class="btn text-input input" type="text" oninput="onSetLineTxt(this.value)">
             <div class="text-setting border-radius">
-                <button class="btn text-btn" onclick="onChangeLine()">↕</button>
-                <button class="btn text-btn" >╋</button>
-                <button class="btn text-btn" >↕</button>
+                <button class="btn switch-btn" onclick="onChangeLine()">⇧⇩</button>
+                <button class="btn add-btn" onclick="onAddLine()">╋</button>
+                <button class="btn remove-btn" onclick="onRemoveLine()">🗑</button>
             </div>
             <div class="text-featers border-radius">
                 <button class="btn text-btn" onclick="onChangeFontSize(1)">A+</button>
                 <button class="btn text-btn" onclick="onChangeFontSize(-1)">A-</button>
                 <button class="btn text-btn" onclick="onAlignText('left')">⇽</button>
-                <button class="btn text-btn" onclick="onAlignText('center')">≡</button>
+                <button class="btn text-btn" onclick="onAlignText('center')">☵</button>
                 <button class="btn text-btn" onclick="onAlignText('right')">⇾</button>
-                <input class="btn text-btn" type="color" onchange="onChangeColor(this.value)">
+                <select class="btn text-btn font-btn" onchange="onChangeFont(this.value)">
+                    <option value="impact">impact</option>
+                    <option value="Arial">Arial</option>
+                    <option value="Gill Sans">Gill Sans</option>
+                    <option value="cambria">cambria</option>
+                    <option value="Georgia">Georgia</option>
+                </select>
+                <button class="btn text-btn">s</button>
+                <label class="btn text-btn">🎨
+                    <input class="btn text-btn" type="color" onchange="onChangeColor(this.value)" hidden>
+                </label>
+
             </div>
-            <div class="smile border-radius">:)</div>
+            <div class="smile-emoji border-radius">😍 😎 😉 😆 😮</div>
             <div class="down-up-load">
                 <a href="#" class="btn download border-radius" download="new-meme.jpg" onclick="downloadMeme(this)">Download</a>
 
