@@ -16,8 +16,8 @@
                     Upload image
                     <input type="file" id="file-upload" class="file-input" name="image" onchange="onImgInput(event)" hidden/>
                 </label>
-            <button class="btn" onclick="onSwitchGallery(1)">Gallery</button>
-            <button class="btn" onclick="onSwitchGallery(3)">My Memes</button>
+            <button class="btn active" onclick="onSwitchGallery(1) , clicked(this)">Gallery</button>
+            <button class="btn" onclick="onSwitchGallery(3) , clicked(this)">My Memes</button>
         </div>
         <div class="x-container hide" onclick="toggleMenu(this)">
             <div class="bar1"></div>
@@ -56,6 +56,7 @@
                 <button class="btn switch-btn" onclick="onChangeLine()">⇧⇩</button>
                 <button class="btn add-btn" onclick="onAddLine()">╋</button>
                 <button class="btn remove-btn" onclick="onRemoveLine()">🗑</button>
+                <button class="btn remove-btn" onclick="onShareImg(false)">S</button>
             </div>
             <div class="text-featers border-radius">
                 <button class="btn text-btn" onclick="onChangeFontSize(+1)">A+</button>
@@ -86,11 +87,12 @@
         </div>
     </section>
 
-    <section class="my-meme hide">
-        <div class="meme-features memes-container"></div>
+    <section class="my-meme gallery hide">
+        <div class="imgs-container memes-container"></div>
     </section>
     
 
+    <script src="js/service/storageService.js"></script>
     <script src="js/service/memeService.js"></script>
     <script src="js/galleryController.js"></script>
     <script src="js/memeController.js"></script>

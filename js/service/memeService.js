@@ -1,6 +1,9 @@
 'use strict'
 
-var gKeywordSearchCountMap = {'funny': 16, 'animal': 8, 'men': 12,'woman': 14, 'comics': 9, 'smile': 11}
+
+const locationsKey = 'imgs'
+
+var gKeywordSearchCountMap = { 'funny': 16, 'animal': 8, 'men': 12, 'woman': 14, 'comics': 9, 'smile': 11 }
 
 var gImgs = [
     { id: 1, url: 'img/1.jpg', keywords: ['funny'] },
@@ -21,6 +24,11 @@ var gImgs = [
     { id: 16, url: 'img/16.jpg', keywords: ['funny', 'cute'] },
     { id: 17, url: 'img/17.jpg', keywords: ['baby', 'cute'] },
     { id: 17, url: 'img/18.jpg', keywords: ['funny', 'cute'] },
+]
+
+var gMyMemes = [
+    { id: 1, url: 'img/1.jpg', keywords: ['funny'] },
+    { id: 2, url: 'img/2.jpg', keywords: ['animal', 'cute'] },
 ]
 
 var gMeme = {
@@ -48,7 +56,7 @@ var gMeme = {
 
 var currLine = gMeme.lines[gMeme.selectedLineIdx]
 
-function getSearchList(){
+function getSearchList() {
     return gKeywordSearchCountMap
 }
 
@@ -60,7 +68,13 @@ function getMeme() {
     return gMeme
 }
 
-function searchTag(tagName){
+function getMyMemes() {
+    let memes = loadFromStorage(locationsKey)
+    if (!memes || !memes.length) memes = gMyMemes
+    return memes
+}
+
+function searchTag(tagName) {
     let imgs = gImgs.filter(tag => tag.keywords.includes(tagName))
     gKeywordSearchCountMap[tagName]++
     renderGallery(imgs)
@@ -70,7 +84,6 @@ function setImg(id) {
     let chosenImg = gImgs.find(img => img.id === id)
     let img = new Image()
     img.src = chosenImg.url
-    console.log(img);
     renderMeme(gMeme.lines, img)
 }
 
@@ -81,6 +94,12 @@ function setLineTxt(text) {
     renderMeme(gMeme.lines)
 }
 
+function savememe(url) {
+    gMyMemes.push({ id: 1, url })
+    saveToMemeStorage()
+    renderMyMeme()
+}
+
 function changeLine() {
     gMeme.selectedLineIdx++
     if (gMeme.selectedLineIdx >= gMeme.lines.length) gMeme.selectedLineIdx = 0
@@ -88,7 +107,7 @@ function changeLine() {
     renderMeme(gMeme.lines)
 }
 
-function addLine(){
+function addLine() {
     gMeme.lines.push(
         {
             txt: 'Add Text',
@@ -102,8 +121,8 @@ function addLine(){
     renderMeme(gMeme.lines)
 }
 
-function removeLine(){
-    gMeme.lines.splice(gMeme.selectedLineIdx,1)
+function removeLine() {
+    gMeme.lines.splice(gMeme.selectedLineIdx, 1)
     renderMeme(gMeme.lines)
 }
 
@@ -126,10 +145,12 @@ function changeColor(color) {
     currLine.color = color
     renderMeme(gMeme.lines)
 }
-function changeSColor(color){
+
+function changeSColor(color) {
     currLine.sColor = color
     renderMeme(gMeme.lines)
 }
+
 function shareImg(imgDataUrl, onSuccess) {
     const formData = new FormData()
     formData.append('img', imgDataUrl)

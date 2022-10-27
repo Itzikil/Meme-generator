@@ -24,7 +24,7 @@ function renderCanvas() {
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
 }
-var currHeight
+var currHeight // not the best way
 function renderMeme(lines, img ,move) {
     if (img) {
         onSwitchGallery(2)
@@ -70,8 +70,6 @@ function onSetLineTxt(text) {
 
 function onSwitchGallery(gallery) {
     if (!gallery) return
-    console.log(gallery);
-
     if (gallery === 1) {
         document.querySelector('.meme-editor').classList.add('hide')
         document.querySelector('.my-meme').classList.add('hide')
@@ -103,14 +101,14 @@ function onRenderTags() {
     let tags = getSearchList()
     let tagsDisplay = document.querySelector('.tags-display')
     for (const tag in tags) {
-        tagsDisplay.innerHTML += `<p onclick="searchTag('${tag}')" class="${tag} word-search">${tag}</p>  &nbsp`
+        tagsDisplay.innerHTML += `<p onclick="onSearch(event, '${tag}')" class="${tag} word-search">${tag}</p>  &nbsp`
         document.querySelector(`.${tag}`).style.fontSize = tags[tag] * 0.06 + 'em'
     }
 }
 
-function onSearch(ev) {
+function onSearch(ev, tag) {
     ev.preventDefault()
-    let tag = document.querySelector('.search').value
+    if(!tag) var tag = document.querySelector('.search').value
     let tags = getSearchList()
     if (tags[tag] < 35) {
         document.querySelector(`.${tag}`).style.fontSize = tags[tag] * 0.06 + 'em'
@@ -186,7 +184,7 @@ function loadImageFromInput(ev, onImageReady) {
 }
 
 function onShareImg(share) {
-    const imgDataUrl = gElCanvas.toDataURL()
+    const imgDataUrl = gElCanvas.toDataURL("image/jpeg")
 
     function onSuccess(uploadedImgUrl) {
         const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
@@ -194,7 +192,8 @@ function onShareImg(share) {
         if (share) {
             window.open(url)
         } else {
-            alert(`Your Draw: ${uploadedImgUrl}`)
+            console.log(uploadedImgUrl);
+            savememe(uploadedImgUrl)
         }
     }
     shareImg(imgDataUrl, onSuccess)

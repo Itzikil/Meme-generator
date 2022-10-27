@@ -79,7 +79,11 @@ a {
     padding-right: 14.375rem;
     gap: 2.5rem;
 }
-
+.active{
+    background-color: white;
+    color: #0f9bb2;
+    border-radius: 15px;
+}
 /* gallery */
 
 
@@ -320,11 +324,6 @@ canvas {
     box-shadow: 0px 6px #632687;
 }
 
-/* .share {
-    background-color: #211b77;
-    box-shadow: 0px 6px #2d2ad1;
-} */
-
 .hide {
     display: none;
 }
@@ -332,11 +331,10 @@ canvas {
 /* my meme  */
 
 .memes-container {
-    width: 100%;
+    padding-top: 20px;
 }
 
 .canvas-container {
-
     width: 500px;
     height: 500px;
 }
