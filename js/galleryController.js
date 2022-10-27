@@ -1,5 +1,4 @@
 'use strict'
-renderGallery()
 
 function renderGallery(imgs){
     if (!imgs || !imgs.length) imgs = getImgs()
@@ -12,4 +11,9 @@ function renderGallery(imgs){
 
 function onIMmgSelect(id){
     setImg(id)
+}
+
+function toggleMenu(x) {
+    x.classList.toggle("change");
+    document.querySelector('.nav').classList.toggle('open-menu')
 }

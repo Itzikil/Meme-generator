@@ -11,11 +11,19 @@
 
     <header class="header">
         <h2 class="logo">Meme Generator</h2>
-        <div class="nav">
-            <!-- <button class="btn">Img Gallery</button> -->
-            <button class="btn" onclick="onGallery(true)">Gallery</button>
-            <button class="btn">About</button>
+        <div class="nav flex">
+                <label for="file-upload" class="btn upload">
+                    Upload image
+                    <input type="file" id="file-upload" class="file-input" name="image" onchange="onImgInput(event)" hidden/>
+                </label>
+            <button class="btn" onclick="onSwitchGallery(1)">Gallery</button>
+            <button class="btn" onclick="onSwitchGallery(3)">My Memes</button>
         </div>
+        <div class="x-container hide" onclick="toggleMenu(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+          </div>
     </header>
 
     <section class="gallery">
@@ -26,8 +34,10 @@
                 </datalist>
                 <input class="btn search feature input" type="text" placeholder="Search" list="search" >
             </form>
-            <div class="tags-display feature btn"></div>
-            <button class="btn more-btn feature">More</button>
+            <div class="tags-flex flex">
+                <div class="tags-display feature btn input"></div>
+                <button class="btn more-btn feature">More</button>
+            </div>
         </div>
         <div class="imgs-container">
 
@@ -41,12 +51,14 @@
         <div class="meme-features">
             <input class="btn text-input input" type="text" oninput="onSetLineTxt(this.value)">
             <div class="text-setting border-radius">
+                <button class="btn move-btn" onclick="onMoveLineUp()">⇧</button>
+                <button class="btn move-btn" onclick="onMoveLineDown()">⇩</button>
                 <button class="btn switch-btn" onclick="onChangeLine()">⇧⇩</button>
                 <button class="btn add-btn" onclick="onAddLine()">╋</button>
                 <button class="btn remove-btn" onclick="onRemoveLine()">🗑</button>
             </div>
             <div class="text-featers border-radius">
-                <button class="btn text-btn" onclick="onChangeFontSize(1)">A+</button>
+                <button class="btn text-btn" onclick="onChangeFontSize(+1)">A+</button>
                 <button class="btn text-btn" onclick="onChangeFontSize(-1)">A-</button>
                 <button class="btn text-btn" onclick="onAlignText('left')">⇽</button>
                 <button class="btn text-btn" onclick="onAlignText('center')">☵</button>
@@ -58,7 +70,9 @@
                     <option value="cambria">cambria</option>
                     <option value="Georgia">Georgia</option>
                 </select>
-                <button class="btn text-btn">s</button>
+                <label class="btn text-btn">S
+                    <input class="btn text-btn" type="color" onchange="onChangeSColor(this.value)" hidden>
+                </label>
                 <label class="btn text-btn">🎨
                     <input class="btn text-btn" type="color" onchange="onChangeColor(this.value)" hidden>
                 </label>
@@ -66,15 +80,14 @@
             </div>
             <div class="smile-emoji border-radius">😍 😎 😉 😆 😮</div>
             <div class="down-up-load">
-                <a href="#" class="btn download border-radius" download="new-meme.jpg" onclick="downloadMeme(this)">Download</a>
-
-                <label for="file-upload" class="btn upload">
-                    Upload image
-                    <input type="file" id="file-upload" class="file-input" name="image" onchange="onImgInput(event)" hidden/>
-                </label>
-                <button class="btn share" onclick="uploadImg(true)">Share on facebook</button>
+                <a href="#" class="btn download flex" download="new-meme.jpg" onclick="downloadMeme(this)">Download</a>
+                <button class="btn share" onclick="onShareImg(true)">Share </button>
             </div>
         </div>
+    </section>
+
+    <section class="my-meme hide">
+        <div class="meme-features memes-container"></div>
     </section>
     
 

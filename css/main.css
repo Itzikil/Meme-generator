@@ -11,6 +11,11 @@
     src: url(/font/Poppins-Medium.ttf);
 }
 
+@font-face {
+    font-family: Poppins-light;
+    src: url(/font/Poppins-Light.ttf);
+}
+
 html {
     font-family: Poppins;
 }
@@ -23,6 +28,13 @@ body {
 
 /* Helpers */
 
+img {
+    width: 100%;
+}
+
+.flex {
+    display: flex;
+}
 
 .btn {
     background-color: transparent;
@@ -42,7 +54,7 @@ a {
     text-decoration: none;
 }
 
-.input{
+.input {
     cursor: auto;
 }
 
@@ -65,7 +77,6 @@ a {
 
 .nav {
     padding-right: 14.375rem;
-    display: flex;
     gap: 2.5rem;
 }
 
@@ -84,7 +95,6 @@ a {
 .gallery-features {
     display: flex;
     padding-left: 20px;
-    /* padding-left: 20px; */
     padding-block: 40px;
     gap: 20px;
 }
@@ -92,17 +102,26 @@ a {
 .feature {
     border-radius: 30px;
     height: 60px;
+    font-family: Poppins-light;
 }
 
-.search-form{
-    flex-grow: 2;
+.search-form {
+    flex-grow: 1;
+}
+
+.tags-flex {
+    flex-grow: 1;
+    gap: 10px;
 }
 
 .search {
     background-color: #22252e;
     padding-inline: 50px;
     width: 100%;
-    /* opacity: 0.380; */
+}
+
+.word-search {
+    cursor: pointer;
 }
 
 .tags-display {
@@ -112,6 +131,10 @@ a {
     justify-content: center;
     align-items: center;
     flex-grow: 5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* max-width: 550px; */
     /* gap: ; */
 }
 
@@ -125,13 +148,16 @@ a {
 }
 
 .gallery-imgs {
-    width: 175px;
-    height: 175px;
+    max-width: 175px;
+    max-height: 175px;
+    flex-grow: 1;
+    flex-shrink: 1;
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 1px 3px 5px #26292db0;
 }
-.gallery-imgs:hover{
+
+.gallery-imgs:hover {
     box-shadow: 0px 3px 25px #26292dd2;
 }
 
@@ -178,13 +204,12 @@ canvas {
     border: 6px solid #34373e;
 }
 
-.meme-editor  .btn{
+.meme-editor .btn {
     text-shadow: 0px 1px gray;
 }
-.meme-editor  .btn:hover{
-    box-shadow: 0px 3px 9px rgb(146, 146, 146);
 
-    /* border-radius: 10px; */
+.meme-editor .btn:hover {
+    box-shadow: 0px 3px 9px rgb(146, 146, 146);
 }
 
 .meme-features {
@@ -209,16 +234,18 @@ canvas {
     padding-inline: 20px;
 }
 
-.switch-btn{
-    background-color:#44b3d0 ;
+.switch-btn {
+    background-color: #44b3d0;
     box-shadow: 0px 6px #048a97;
 }
-.add-btn{
-    background-color:#3fdb57 ;
+
+.add-btn {
+    background-color: #3fdb57;
     box-shadow: 0px 6px #015d32;
 }
-.remove-btn{
-    background-color:#de3537 ;
+
+.remove-btn {
+    background-color: #de3537;
     box-shadow: 0px 6px #8c0606;
 }
 
@@ -246,7 +273,7 @@ canvas {
     flex-grow: 3;
 }
 
-.font-btn{
+.font-btn {
     flex-grow: 3;
 }
 
@@ -257,7 +284,7 @@ canvas {
     box-shadow: 0px 6px #3e7d7a;
 }
 
-.smile-emoji{
+.smile-emoji {
     background-color: white;
     width: 100%;
     flex-grow: 2;
@@ -279,30 +306,198 @@ canvas {
 .down-up-load>* {
     border-radius: 10px;
     flex-grow: 1;
-    text-align: center;
 }
 
 .download {
     background-color: #1e7cd3;
     box-shadow: 0px 6px #165b9c;
+    align-items: center;
+    justify-content: center;
 }
 
-.upload {
+.share {
     background-color: #8f44bb;
     box-shadow: 0px 6px #632687;
 }
 
-.share{
+/* .share {
     background-color: #211b77;
     box-shadow: 0px 6px #2d2ad1;
-}
+} */
 
 .hide {
     display: none;
 }
 
-@media (max-width: 800px) {
+/* my meme  */
+
+.memes-container {
+    width: 100%;
+}
+
+.canvas-container {
+
+    width: 500px;
+    height: 500px;
+}
+
+@media (max-width: 1100px) {
+    .nav {
+        padding-right: 4.375rem;
+    }
+
+    .canvas-container {
+        align-self: flex-start;
+        width: 40vw;
+        height: 65vh;
+    }
+
+    .meme-editor {
+        /* justify-content: flex-start; */
+        justify-content: space-between;
+    }
+
+    .meme-editor {
+        gap: 20px;
+    }
+
+    .meme-features {
+        width: 425px;
+        height: 426px;
+        justify-self: flex-end;
+    }
+}
+
+@media (max-width: 870px) {
+    html {
+        font-size: 10px;
+    }
+
+    .canvas-container {
+        align-self: flex-start;
+        width: 40vw;
+        height: 65vh;
+    }
+
+    .gallery-imgs {
+        max-width: 160px;
+        max-height: 160px;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .canvas-container {
+        width: 97vw;
+    }
+
+    .meme-features {
+        justify-self: center;
+        margin: 5px;
+        height: 500px;
+    }
+
+    html {
+        font-size: 12px;
+        overflow-x: hidden;
+    }
+
+    body {
+        width: 100vw;
+        margin: 0;
+        overflow-x: hidden;
+    }
+
+    .header {
+        border-radius: 0;
+        position: relative;
+        overflow: visible;
+    }
+
+    .nav {
+        transform: translatex(100%);
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: var(--clr1) !important;
+        padding: 10px;
+        padding-block: 20px;
+        transition: .9s;
+        border-bottom-left-radius: 10px;
+    }
+
+    .open-menu {
+        transform: translatex(0%);
+    }
+
+    .more-btn {
+        align-self: center;
+        height: 35px;
+    }
+
+    .gallery {
+        height: 87vh;
+        padding-bottom: 215px;
+        margin-inline: 1em;
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
     .gallery-features {
         flex-direction: column;
+        width: 100%;
+        padding-top: 20px
+    }
+
+    .gallery-imgs {
+        max-width: 140px;
+        max-height: 140px;
+    }
+
+    .imgs-container {
+        padding-inline: 10px;
+        gap: 20px;
+    }
+
+
+
+    .x-container {
+        display: block;
+        cursor: pointer;
+        padding-inline: 20px;
+    }
+
+    .bar1,
+    .bar2,
+    .bar3 {
+        width: 35px;
+        height: 5px;
+        background-color: white;
+        margin: 6px 0;
+        transition: 0.4s;
+        border-radius: 4px;
+    }
+
+    .change .bar1 {
+        transform: translate(0, 11px) rotate(-45deg);
+    }
+
+    .change .bar2 {
+        opacity: 0;
+    }
+
+    .change .bar3 {
+        transform: translate(0, -11px) rotate(45deg);
+    }
+
+    .meme-editor {
+        flex-direction: column;
+    }
+
+    .meme-features {
+        width: 100%;
     }
 }

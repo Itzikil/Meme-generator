@@ -1,47 +1,66 @@
 'use strict'
 
-let gElCanvas
+var gElCanvas
 let gCtx
-let currImg
+var gCurrImg
 
-function onInit(){
+function onInit() {
     renderCanvas()
     onRenderSearchList()
     onRenderTags()
+    renderGallery()
 }
 
 
+window.addEventListener('resize', resizeCanvas)
+function resizeCanvas() {
+    const elContainer = document.querySelector('.canvas-container')
+    gElCanvas.width = elContainer.offsetWidth
+    gElCanvas.height = elContainer.offsetHeight
+    renderMeme(getMeme().lines)
+}
 
 function renderCanvas() {
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
 }
-
-function renderMeme(lines, img) {
+var currHeight
+function renderMeme(lines, img ,move) {
     if (img) {
-        onGallery(false)
+        onSwitchGallery(2)
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-        currImg = img
-    } else gCtx.drawImage(currImg, 0, 0, gElCanvas.width, gElCanvas.height)
-    
-    let align 
-    let height = 50
-    lines.forEach((line,idx) => {
+        gCurrImg = img
+    } else gCtx.drawImage(gCurrImg, 0, 0, gElCanvas.width, gElCanvas.height)
+
+    let memeIdx = getMeme().selectedLineIdx
+    let align
+    var height 
+    lines.forEach((line, idx) => {
         let text = line.txt
-        gCtx.font = line.size + 'px '+ line.font
-        gCtx.fillStyle = line.color 
-        gCtx.strokeStyle = 'black' 
-        
-        if(line.align === 'left') align = 10
-        else if(line.align === 'center') align = gElCanvas.width / 2
+        gCtx.font = line.size + 'px ' + line.font
+        gCtx.fillStyle = line.color
+        gCtx.strokeStyle = line.sColor
+
+        if (line.align === 'left') align = 10
+        else if (line.align === 'center') align = gElCanvas.width / 2
         else align = gElCanvas.width - 10
+
+        if(move && idx === memeIdx) {    
+            if(move === 'up') currHeight -= 5
+            if(move === 'down') currHeight += 5
+            gCtx.fillText(text, align, currHeight)
+            gCtx.strokeText(text, align, currHeight)
+            return
+        }
+
+        if (idx === 0) height = 50
+        if (idx === 1) height = gElCanvas.height * 0.85
+        if (idx > 1) height = gElCanvas.height / 2
         
-        if(idx === 1) height = 450
-        if(idx > 1) height = gElCanvas.height / 2
-        
-        gCtx.strokeRect(align - 10, height - line.size - 10, 300, line.size + 25 )
-        gCtx.fillText(text, align, height) 
-        gCtx.strokeText(text, align, height) 
+        if (idx === memeIdx) gCtx.strokeRect(align - 10, height - line.size - 10, 300, line.size + 25), currHeight =  height
+        gCtx.fillText(text, align, height)
+        gCtx.strokeText(text, align, height)
+       
     })
 }
 
@@ -49,18 +68,29 @@ function onSetLineTxt(text) {
     setLineTxt(text)
 }
 
-function onGallery(gallery) {
-    if (!gallery) {
-        document.querySelector('.meme-editor').classList.remove('hide')
-        document.querySelector('.gallery').classList.add('hide')
-    } else {
+function onSwitchGallery(gallery) {
+    if (!gallery) return
+    console.log(gallery);
+
+    if (gallery === 1) {
         document.querySelector('.meme-editor').classList.add('hide')
+        document.querySelector('.my-meme').classList.add('hide')
         document.querySelector('.gallery').classList.remove('hide')
     }
+    if (gallery === 2) {
+        document.querySelector('.meme-editor').classList.remove('hide')
+        document.querySelector('.my-meme').classList.add('hide')
+        document.querySelector('.gallery').classList.add('hide')
+    } if (gallery === 3) {
+        document.querySelector('.meme-editor').classList.add('hide')
+        document.querySelector('.gallery').classList.add('hide')
+        document.querySelector('.my-meme').classList.remove('hide')
+    }
+    return gallery
 }
 
-function onRenderSearchList(){
-    let tags = renderSearchList()
+function onRenderSearchList() {
+    let tags = getSearchList()
     let search = document.querySelector('#search')
     let strHTML = ''
     for (const tag in tags) {
@@ -69,56 +99,65 @@ function onRenderSearchList(){
     search.innerHTML = strHTML
 }
 
-function onRenderTags(){
-    let tags = renderSearchList()
+function onRenderTags() {
+    let tags = getSearchList()
     let tagsDisplay = document.querySelector('.tags-display')
     for (const tag in tags) {
-        tagsDisplay.innerHTML += `<p class="${tag}">${tag}</p>  &nbsp`
-        document.querySelector(`.${tag}`).style.fontSize = tags[tag] * 1.5 + 'px' 
+        tagsDisplay.innerHTML += `<p onclick="searchTag('${tag}')" class="${tag} word-search">${tag}</p>  &nbsp`
+        document.querySelector(`.${tag}`).style.fontSize = tags[tag] * 0.06 + 'em'
     }
 }
 
-function onSearch(ev){
+function onSearch(ev) {
     ev.preventDefault()
     let tag = document.querySelector('.search').value
-    let tags = renderSearchList()
-    if (tags[tag] < 31){
-        document.querySelector(`.${tag}`).style.fontSize = tags[tag]* 1.5 +'px'
+    let tags = getSearchList()
+    if (tags[tag] < 35) {
+        document.querySelector(`.${tag}`).style.fontSize = tags[tag] * 0.06 + 'em'
     }
     searchTag(tag)
 }
 
+/////////////// meme features /////////
 
-/////////////// text features/////////
+function onChangeFontSize(size) {
+    changeFontSize(size)
+}
+
+function onMoveLineUp() {
+    renderMeme(getMeme().lines,null,'up')
+}
+
+function onMoveLineDown() {
+    renderMeme(getMeme().lines,null,'down')
+}
 
 function onChangeLine() {
     changeLine()
 }
 
-function onAddLine(){
+function onAddLine() {
     addLine()
 }
 
-function onRemoveLine(){
+function onRemoveLine() {
     removeLine()
+}
+
+function onAlignText(align) {
+    alignText(align)
+}
+
+function onChangeFont(font) {
+    changeFont(font)
 }
 
 function onChangeColor(color) {
     changeColor(color)
 }
 
-function onChangeFontSize(size) {
-    changeFontSize(size)
-}
-
-
-
-function onAlignText(align){
-    alignText(align)
-}
-
-function onChangeFont(font){
-    changeFont(font)
+function onChangeSColor(color) {
+    changeSColor(color)
 }
 
 function downloadMeme(elLink) {
@@ -131,21 +170,22 @@ function onImgInput(ev) {
     loadImageFromInput(ev, renderImg)
 }
 
-function loadImageFromInput(ev, onImageReady) {
-    const reader = new FileReader()
-    reader.onload = function (event) {
-        let img = new Image()
-        img.src = event.target.result
-        img.onload = () => onImageReady(img)
-    }
-    reader.readAsDataURL(ev.target.files[0])
-}
-
 function renderImg(img) {
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
 }
 
-function uploadImg(share) {
+function loadImageFromInput(ev, onImageReady) {
+    const reader = new FileReader()
+    reader.onload = function (event) {
+        var img = new Image()
+        img.src = event.target.result
+        img.onload = () => onImageReady(img)
+        renderMeme(getMeme().lines, img)
+    }
+    reader.readAsDataURL(ev.target.files[0])
+}
+
+function onShareImg(share) {
     const imgDataUrl = gElCanvas.toDataURL()
 
     function onSuccess(uploadedImgUrl) {
@@ -157,5 +197,5 @@ function uploadImg(share) {
             alert(`Your Draw: ${uploadedImgUrl}`)
         }
     }
-    doUploadImg(imgDataUrl, onSuccess)
+    shareImg(imgDataUrl, onSuccess)
 }

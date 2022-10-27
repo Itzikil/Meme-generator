@@ -1,6 +1,6 @@
 'use strict'
 
-var gKeywordSearchCountMap = {'funny': 16, 'animal': 8, 'men': 12,'woman': 14, 'comics': 9, 'smile': 11 }
+var gKeywordSearchCountMap = {'funny': 16, 'animal': 8, 'men': 12,'woman': 14, 'comics': 9, 'smile': 11}
 
 var gImgs = [
     { id: 1, url: 'img/1.jpg', keywords: ['funny'] },
@@ -24,7 +24,7 @@ var gImgs = [
 ]
 
 var gMeme = {
-    selectedImgId: 2,
+    selectedImgId: 2, //?
     selectedLineIdx: 0,
     lines: [
         {
@@ -32,6 +32,7 @@ var gMeme = {
             size: 22,
             align: 'center',
             color: 'white',
+            sColor: 'black',
             font: 'Impact',
         },
         {
@@ -39,6 +40,7 @@ var gMeme = {
             size: 30,
             align: 'left',
             color: 'white',
+            sColor: 'black',
             font: 'Impact',
         }
     ]
@@ -46,14 +48,21 @@ var gMeme = {
 
 var currLine = gMeme.lines[gMeme.selectedLineIdx]
 
-function renderSearchList(){
+function getSearchList(){
     return gKeywordSearchCountMap
+}
+
+function getImgs() {
+    return gImgs
+}
+
+function getMeme() {
+    return gMeme
 }
 
 function searchTag(tagName){
     let imgs = gImgs.filter(tag => tag.keywords.includes(tagName))
     gKeywordSearchCountMap[tagName]++
-    console.log(gKeywordSearchCountMap);
     renderGallery(imgs)
 }
 
@@ -61,28 +70,14 @@ function setImg(id) {
     let chosenImg = gImgs.find(img => img.id === id)
     let img = new Image()
     img.src = chosenImg.url
-    getMeme(img)
-}
-function getMeme(img) {
+    console.log(img);
     renderMeme(gMeme.lines, img)
 }
 
+///////// meme features //////
+
 function setLineTxt(text) {
     currLine.txt = text
-    renderMeme(gMeme.lines)
-}
-
-function getImgs(imgs) {
-    return gImgs
-}
-
-function changeColor(color) {
-    currLine.color = color
-    renderMeme(gMeme.lines)
-}
-
-function changeFontSize(size) {
-    currLine.size += size
     renderMeme(gMeme.lines)
 }
 
@@ -112,6 +107,11 @@ function removeLine(){
     renderMeme(gMeme.lines)
 }
 
+function changeFontSize(size) {
+    currLine.size += size
+    renderMeme(gMeme.lines)
+}
+
 function alignText(align) {
     currLine.align = align
     renderMeme(gMeme.lines)
@@ -122,7 +122,15 @@ function changeFont(font) {
     renderMeme(gMeme.lines)
 }
 
-function doUploadImg(imgDataUrl, onSuccess) {
+function changeColor(color) {
+    currLine.color = color
+    renderMeme(gMeme.lines)
+}
+function changeSColor(color){
+    currLine.sColor = color
+    renderMeme(gMeme.lines)
+}
+function shareImg(imgDataUrl, onSuccess) {
     const formData = new FormData()
     formData.append('img', imgDataUrl)
     const XHR = new XMLHttpRequest()
