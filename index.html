@@ -9,15 +9,21 @@
 </head>
 <body onload="onInit()">
 
+    <a class="a1" href="http://127.0.0.1:5500/?lang=en">English</a>&nbsp
+    <a class="a2" href="http://127.0.0.1:5500/?lang=he">עברית</a>&nbsp
+    <button class="btn" onclick="onRandom()">Random</button>
+
     <header class="header">
         <h2 class="logo">Meme Generator</h2>
         <div class="nav flex">
-                <label for="file-upload" class="btn upload">
-                    Upload image
-                    <input type="file" id="file-upload" class="file-input" name="image" onchange="onImgInput(event)" hidden/>
-                </label>
-            <button class="btn active" onclick="onSwitchGallery(1) , clicked(this)">Gallery</button>
-            <button class="btn" onclick="onSwitchGallery(3) , clicked(this)">My Memes</button>
+
+                <label  for="file-upload" data-trans="Upload image" class="btn upload">Upload image</label>
+                    <label for="file-upload" class="btn upload">
+                        <input type="file" id="file-upload" class="file-input" name="image" onchange="onImgInput(event)" hidden/>
+                    </label>
+
+            <button class="btn active" onclick="onSwitchGallery(1) , clicked(this)" data-trans="Gallery">Gallery</button>
+            <button class="btn" onclick="onSwitchGallery(3) , clicked(this)" data-trans="My Memes">My Memes</button>
         </div>
         <div class="x-container hide" onclick="toggleMenu(this)">
             <div class="bar1"></div>
@@ -32,11 +38,11 @@
             <form class="search-form" action="" onsubmit="onSearch(event)">
                 <datalist id="search">
                 </datalist>
-                <input class="btn search feature input" type="text" placeholder="Search" list="search" >
+                <input class="btn search feature input" type="text" placeholder="Search" list="search" data-trans="Search">
             </form>
             <div class="tags-flex flex">
                 <div class="tags-display feature btn input"></div>
-                <button class="btn more-btn feature">More</button>
+                <button class="btn more-btn feature" data-trans="More">More</button>
             </div>
         </div>
         <div class="imgs-container">
@@ -79,10 +85,10 @@
                 </label>
 
             </div>
-            <div class="smile-emoji border-radius">😍 😎 😉 😆 😮</div>
+            <div class="smile-emoji border-radius flex"></div>
             <div class="down-up-load">
-                <a href="#" class="btn download flex" download="new-meme.jpg" onclick="downloadMeme(this)">Download</a>
-                <button class="btn share" onclick="onShareImg(true)">Share </button>
+                <a href="#" class="btn download flex" download="new-meme.jpg" onclick="downloadMeme(this)" data-trans="Download">Download</a>
+                <button class="btn share" onclick="onShareImg(true)" data-trans="Share">Share </button>
             </div>
         </div>
     </section>
@@ -92,6 +98,8 @@
     </section>
     
 
+    <script src="js/service/utils.service.js"></script>
+    <script src="js/service/i-18.service.js"></script>
     <script src="js/service/storageService.js"></script>
     <script src="js/service/memeService.js"></script>
     <script src="js/galleryController.js"></script>

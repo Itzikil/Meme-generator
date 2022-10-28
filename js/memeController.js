@@ -9,8 +9,10 @@ function onInit() {
     onRenderSearchList()
     onRenderTags()
     renderGallery()
+    renderLang()
+    renderStickers()
+    renderMyMeme()
 }
-
 
 window.addEventListener('resize', resizeCanvas)
 function resizeCanvas() {
@@ -24,8 +26,8 @@ function renderCanvas() {
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
 }
-var currHeight // not the best way
-function renderMeme(lines, img ,move) {
+
+function renderMeme(lines, img) {
     if (img) {
         onSwitchGallery(2)
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
@@ -34,34 +36,38 @@ function renderMeme(lines, img ,move) {
 
     let memeIdx = getMeme().selectedLineIdx
     let align
-    var height 
-    lines.forEach((line, idx) => {
-        let text = line.txt
-        gCtx.font = line.size + 'px ' + line.font
-        gCtx.fillStyle = line.color
-        gCtx.strokeStyle = line.sColor
 
+    lines.forEach((line, idx) => {
+        
         if (line.align === 'left') align = 10
         else if (line.align === 'center') align = gElCanvas.width / 2
         else align = gElCanvas.width - 10
 
-        if(move && idx === memeIdx) {    
-            if(move === 'up') currHeight -= 5
-            if(move === 'down') currHeight += 5
-            gCtx.fillText(text, align, currHeight)
-            gCtx.strokeText(text, align, currHeight)
-            return
+        if (line.url) {
+            return addSticker(line.id ,align)
         }
 
-        if (idx === 0) height = 50
-        if (idx === 1) height = gElCanvas.height * 0.85
-        if (idx > 1) height = gElCanvas.height / 2
+        let text = line.txt
+        gCtx.font = line.size + 'px ' + line.font
+        gCtx.fillStyle = line.color
+        gCtx.strokeStyle = line.sColor
         
-        if (idx === memeIdx) gCtx.strokeRect(align - 10, height - line.size - 10, 300, line.size + 25), currHeight =  height
-        gCtx.fillText(text, align, height)
-        gCtx.strokeText(text, align, height)
-       
+        if (idx === memeIdx) gCtx.strokeRect(align - 10, line.height - line.size - 10, 300, line.size + 25)
+        gCtx.fillText(text, align, line.height)
+        gCtx.strokeText(text, align, line.height)
     })
+}
+
+function renderStickers(){
+    let stickers = getStickers()  
+    let strHTML = stickers.map(sticker =>`
+    <img onclick="onStickerSelect(${sticker.id})" class="gallery-imgs" src="${sticker.url}">
+    `)
+    document.querySelector('.smile-emoji').innerHTML = strHTML.join('')
+}
+
+function renderSticker(sticker, size , align){
+    gCtx.drawImage(sticker, align, size.height , size.size, size.size)
 }
 
 function onSetLineTxt(text) {
@@ -92,7 +98,7 @@ function onRenderSearchList() {
     let search = document.querySelector('#search')
     let strHTML = ''
     for (const tag in tags) {
-        strHTML += `<option value=${tag} label="${tags[tag]} searches"></option>`
+        strHTML += `<option value=${tag} label="${tags[tag]} searches">${tag}</option>`
     }
     search.innerHTML = strHTML
 }
@@ -123,11 +129,11 @@ function onChangeFontSize(size) {
 }
 
 function onMoveLineUp() {
-    renderMeme(getMeme().lines,null,'up')
+    moveLineUp()
 }
 
 function onMoveLineDown() {
-    renderMeme(getMeme().lines,null,'down')
+    moveLineDown()
 }
 
 function onChangeLine() {
@@ -164,7 +170,12 @@ function downloadMeme(elLink) {
     elLink.href = imgContent
 }
 
+function onStickerSelect(id){
+    addSticker(id , false)
+}
+
 function onImgInput(ev) {
+    console.log('hi')
     loadImageFromInput(ev, renderImg)
 }
 
@@ -193,7 +204,7 @@ function onShareImg(share) {
             window.open(url)
         } else {
             console.log(uploadedImgUrl);
-            savememe(uploadedImgUrl)
+            return savememe(uploadedImgUrl)
         }
     }
     shareImg(imgDataUrl, onSuccess)

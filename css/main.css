@@ -27,6 +27,9 @@ body {
 }
 
 /* Helpers */
+.rtl {
+    direction: rtl;
+}
 
 img {
     width: 100%;
@@ -58,6 +61,10 @@ a {
     cursor: auto;
 }
 
+.a1,
+.a2 {
+    color: #165b9c;
+}
 
 /* header */
 
@@ -72,20 +79,21 @@ a {
 }
 
 .logo {
-    padding-left: 7.5rem;
+    padding-inline-start: 7.5rem;
 }
 
 .nav {
-    padding-right: 14.375rem;
+    padding-inline-end: 14.375rem;
     gap: 2.5rem;
 }
-.active{
+
+.active {
     background-color: white;
     color: #0f9bb2;
     border-radius: 15px;
 }
-/* gallery */
 
+/* gallery */
 
 .gallery {
     background-color: #383b44;
@@ -292,7 +300,13 @@ canvas {
     background-color: white;
     width: 100%;
     flex-grow: 2;
-    text-align: center
+    flex-wrap: wrap;
+    text-align: center;
+    overflow: auto;
+}
+
+.smile-emoji>* {
+    width: 25px;
 }
 
 .text-btn {
@@ -339,7 +353,7 @@ canvas {
     height: 500px;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1000px) {
     .nav {
         padding-right: 4.375rem;
     }
