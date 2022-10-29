@@ -92,9 +92,9 @@ function getMeme() {
 }
 
 function getMyMemes() {
-    // let memes = loadFromStorage(locationsKey) CORB making problems
-    let memes
+    let memes = loadFromStorage(locationsKey) // CORB making problems
     if (!memes || !memes.length) memes = gMyMemes
+    console.log('the image doesnt work beacause CORB');
     return memes
 }
 

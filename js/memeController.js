@@ -51,8 +51,9 @@ function renderMeme(lines, img) {
         gCtx.font = line.size + 'px ' + line.font
         gCtx.fillStyle = line.color
         gCtx.strokeStyle = line.sColor
+        console.log(text);
         
-        if (idx === memeIdx) gCtx.strokeRect(align - 10, line.height - line.size - 10, 300, line.size + 25)
+        if (idx === memeIdx) gCtx.strokeRect(align - 10, line.height - line.size - 10, (line.size * text.length / 2)  + 10, line.size + 25)
         gCtx.fillText(text, align, line.height)
         gCtx.strokeText(text, align, line.height)
     })
@@ -121,6 +122,10 @@ function onSearch(ev, tag) {
     }
     searchTag(tag)
 }
+
+// function onCanvasClick(){
+
+// }
 
 /////////////// meme features /////////
 

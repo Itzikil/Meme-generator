@@ -37,7 +37,6 @@ function onSaveMeme(){
     const imgDataUrl = gElCanvas.toDataURL()
 }
 
-
 function onRandom(){
     randomMeme()
 }

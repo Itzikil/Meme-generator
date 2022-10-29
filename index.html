@@ -52,7 +52,7 @@
 
     <section class="meme-editor hide">
         <div class="canvas-container">
-            <canvas width="500" height="500"></canvas>
+            <canvas onclick="onCanvasClick()" width="500" height="500"></canvas>
         </div>
         <div class="meme-features">
             <input class="btn text-input input" type="text" oninput="onSetLineTxt(this.value)">
@@ -89,6 +89,7 @@
             <div class="down-up-load">
                 <a href="#" class="btn download flex" download="new-meme.jpg" onclick="downloadMeme(this)" data-trans="Download">Download</a>
                 <button class="btn share" onclick="onShareImg(true)" data-trans="Share">Share </button>
+                <button class="btn sharee" onclick="onShareImg(true)" data-trans="Share">Sharee </button>
             </div>
         </div>
     </section>
@@ -97,7 +98,6 @@
         <div class="imgs-container memes-container"></div>
     </section>
     
-
     <script src="js/service/utils.service.js"></script>
     <script src="js/service/i-18.service.js"></script>
     <script src="js/service/storageService.js"></script>
