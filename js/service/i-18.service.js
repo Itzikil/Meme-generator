@@ -3,36 +3,36 @@
 var gTrans = {
 
     'Gallery' : {
-        en : 'Gallery',
-        he : 'גלריה',
+        EN : 'Gallery',
+        HE : 'גלריה',
     },
     'Upload image' : {
-        en : 'Upload image',
-        he : 'העלה תמונה',
+        EN : 'Upload image',
+        HE : 'העלה תמונה',
     },
     'My Memes' : {
-        en : 'My Memes',
-        he : 'המימים שלי',
+        EN : 'My Memes',
+        HE : 'המימים שלי',
     },
     'Share' : {
-        en : 'Share',
-        he : 'שתף ',
+        EN : 'Share',
+        HE : 'שתף ',
     },
     'Download' : {
-        en : 'Download',
-        he : 'הורד',
+        EN : 'Download',
+        HE : 'הורד',
     },
-    'More' : {
-        en : 'More',
-        he : 'עוד',
+    'Random' : {
+        EN : 'Random',
+        HE : 'אקראי',
     },
     'Search' : {
-        en : 'Search',
-        he : 'חפש',
+        EN : 'Search',
+        HE : 'חפש',
     },
 }
 
-let gCurrLang = 'en'
+let gCurrLang = 'EN'
 
 
 function doTrans() {
@@ -51,7 +51,7 @@ function getTrans(transKey) {
     if (!transMap) return 'UNKNOWN'
 
     let trans = transMap[gCurrLang]
-    if (!trans) trans = transMap.en
+    if (!trans) trans = transMap.EN
     return trans
 }
 

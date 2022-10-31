@@ -54,6 +54,7 @@ function onSetLang(lang){
     setLang(lang)
     doTrans()
     setDirection(lang)
+    document.querySelector('.defaul-option').innerText = '🌍' + lang 
 
     const queryStringParams = `?lang=${lang}`
     const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + queryStringParams
@@ -61,6 +62,6 @@ function onSetLang(lang){
 }
 
 function setDirection(lang) {
-    if (lang === 'he') document.body.classList.add('rtl')
+    if (lang === 'HE') document.body.classList.add('rtl')
     else document.body.classList.remove('rtl')
 }

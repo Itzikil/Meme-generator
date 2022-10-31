@@ -2,7 +2,7 @@
 
 const locationsKey = 'imgs'
 
-var gKeywordSearchCountMap = { 'funny': 16, 'animal': 8, 'men': 12, 'woman': 14, 'comics': 9, 'smile': 11 }
+var gKeywordSearchCountMap = { 'funny': 16, 'animal': 9, 'men': 12, 'woman': 14, 'comics': 10, 'smile': 11 }
 
 var gRandomTxt = [
     'I love falafel',
@@ -19,11 +19,11 @@ var gRandomTxt = [
 ]
 
 var gStickers = [
-    { id: 111, url: 'stickers/chatting.png', height: 250, align: 'center', size: 100 },
-    { id: 222, url: 'stickers/dumbbell.png', height: 250, align: 'center', size: 100 },
-    { id: 333, url: 'stickers/laptop.png', height: 250, align: 'center', size: 100 },
-    { id: 444, url: 'stickers/reading.png', height: 250, align: 'center', size: 100 },
-    { id: 555, url: 'stickers/video-calling.png', height: 250, align: 'center', size: 100 },
+    { id: 111, url: 'stickers/01.png', height: 250, align: 'left', size: 100 },
+    { id: 222, url: 'stickers/02.png', height: 250, align: 'left', size: 100 },
+    { id: 333, url: 'stickers/03.png', height: 250, align: 'left', size: 100 },
+    { id: 444, url: 'stickers/04.png', height: 250, align: 'left', size: 100 },
+    { id: 555, url: 'stickers/05.png', height: 250, align: 'left', size: 100 },
 ]
 
 var gImgs = [
@@ -68,11 +68,11 @@ var gMeme = {
         {
             txt: 'I always eat Falafel',
             size: 30,
-            align: 'left',
+            align: 'center',
             color: 'white',
             sColor: 'black',
             font: 'Impact',
-            height: 400,
+            height: 420,
         }
     ]
 }
@@ -94,7 +94,6 @@ function getMeme() {
 function getMyMemes() {
     let memes = loadFromStorage(locationsKey) // CORB making problems
     if (!memes || !memes.length) memes = gMyMemes
-    console.log('the image doesnt work beacause CORB');
     return memes
 }
 
@@ -170,7 +169,9 @@ function addLine() {
             height: 250,
         }
     )
-    changeLine()
+    gMeme.selectedLineIdx = gMeme.lines.length -1
+    gCurrLine = gMeme.lines[gMeme.selectedLineIdx]
+    // changeLine()
     renderMeme(gMeme.lines)
 }
 

@@ -76,6 +76,7 @@ a {
     align-items: center;
     border-radius: 50px;
     margin-bottom: 20px;
+    position: relative;
 }
 
 .logo {
@@ -83,7 +84,7 @@ a {
 }
 
 .nav {
-    padding-inline-end: 14.375rem;
+    padding-inline-end: 13%;
     gap: 2.5rem;
 }
 
@@ -91,6 +92,19 @@ a {
     background-color: white;
     color: #0f9bb2;
     border-radius: 15px;
+}
+
+.select-lang{
+    appearance: none;
+    font-size: 0.7em;
+    position: absolute;
+    inset-inline-end: 3%;
+    top: 35%;
+    padding: 5px;
+    width: 50px;
+}
+.select-lang > *{
+    background-color: #22252e;
 }
 
 /* gallery */
@@ -154,14 +168,13 @@ a {
     background: var(--clr1);
     font-weight: 300;
     font-size: 1.15em;
-    height: 40px;
+    /* height: 40px; */
     flex-grow: 1;
     align-self: flex-end;
 }
 
 .gallery-imgs {
-    max-width: 175px;
-    max-height: 175px;
+    /* max-width: 175px; */
     flex-grow: 1;
     flex-shrink: 1;
     border-radius: 10px;
@@ -173,7 +186,7 @@ a {
     box-shadow: 0px 3px 25px #26292dd2;
 }
 
-.imgs-container {
+/* .imgs-container {
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
@@ -181,6 +194,16 @@ a {
     overflow-y: scroll;
     height: 100%;
     margin-bottom: 200px;
+} */
+.imgs-container {
+    display: grid;
+    grid-gap: 15px;
+    padding-inline: 50px;
+    overflow-y: scroll;
+    height: 100%;
+    margin-bottom: 200px;
+    grid-template-columns: repeat(auto-fill , minmax(155px,1fr))
+
 }
 
 /* gallery scroller */
@@ -245,6 +268,10 @@ canvas {
     flex-grow: 1;
     padding-inline: 20px;
 }
+.move-btn{
+    border: 1px rgba(66, 65, 65, 0.781) solid;
+    box-shadow: 0px 6px #515252b0;
+}
 
 .switch-btn {
     background-color: #44b3d0;
@@ -254,11 +281,17 @@ canvas {
 .add-btn {
     background-color: #3fdb57;
     box-shadow: 0px 6px #015d32;
+    font-weight: 900;
 }
 
 .remove-btn {
     background-color: #de3537;
     box-shadow: 0px 6px #8c0606;
+}
+
+.save-btn {
+    background-color: #867777;
+    box-shadow: 0px 6px #636060;
 }
 
 .text-setting {
@@ -278,40 +311,43 @@ canvas {
     width: 100%;
     padding-inline: 20px;
     padding-block: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    grid-gap: 20px;
     flex-grow: 3;
 }
 
 .font-btn {
-    flex-grow: 3;
+    grid-column: 1/4;
 }
 
 .text-featers>* {
     border-radius: 10px;
-    width: 12%;
-    height: 33%;
+    width: 100%;
+    height: 45px;
     box-shadow: 0px 6px #3e7d7a;
+    font-weight: 600
 }
 
 .smile-emoji {
-    background-color: white;
+    background-color: rgb(241, 241, 241);
     width: 100%;
     flex-grow: 2;
     flex-wrap: wrap;
     text-align: center;
     overflow: auto;
+    align-items: center;
 }
 
 .smile-emoji>* {
     width: 25px;
+    height: 80%;
 }
 
 .text-btn {
     background-color: white;
     color: black;
+    text-align: center;
 }
 
 .down-up-load {
@@ -443,6 +479,11 @@ canvas {
         transform: translatex(0%);
     }
 
+    .select-lang{
+        position: relative;
+        inset-inline-start: 45%;
+    }
+
     .more-btn {
         align-self: center;
         height: 35px;
@@ -452,6 +493,7 @@ canvas {
         height: 87vh;
         padding-bottom: 215px;
         margin-inline: 1em;
+        padding-right: 0;
     }
 
     ::-webkit-scrollbar {
@@ -461,7 +503,8 @@ canvas {
     .gallery-features {
         flex-direction: column;
         width: 100%;
-        padding-top: 20px
+        padding-top: 20px;
+        padding-right: 15px;
     }
 
     .gallery-imgs {

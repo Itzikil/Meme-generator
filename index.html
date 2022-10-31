@@ -6,25 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meme Gen</title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="/font-awesome/font-awesome/css/font-awesome.min.css">
 </head>
-<body onload="onInit()">
 
-    <a class="a1" href="http://127.0.0.1:5500/?lang=en">English</a>&nbsp
-    <a class="a2" href="http://127.0.0.1:5500/?lang=he">עברית</a>&nbsp
-    <button class="btn" onclick="onRandom()">Random</button>
+<body onload="onInit()">
 
     <header class="header">
         <h2 class="logo">Meme Generator</h2>
         <div class="nav flex">
-
                 <label  for="file-upload" data-trans="Upload image" class="btn upload">Upload image</label>
-                    <label for="file-upload" class="btn upload">
+                    <label for="file-upload" class="btn upload" style="position: absolute;">
                         <input type="file" id="file-upload" class="file-input" name="image" onchange="onImgInput(event)" hidden/>
                     </label>
-
             <button class="btn active" onclick="onSwitchGallery(1) , clicked(this)" data-trans="Gallery">Gallery</button>
             <button class="btn" onclick="onSwitchGallery(3) , clicked(this)" data-trans="My Memes">My Memes</button>
+            <div class="btn div-lang">
+                <select class="select-lang btn" onchange="window.location.href=this.value">
+                    <option selected disabled class="defaul-option">lang</option>
+                    <option value="http://127.0.0.1:5500/?lang=EN"><a class="a1" href="">🌍 EN</a></option>
+                    <option value="http://127.0.0.1:5500/?lang=HE"><a class="a2" href="">🌍 HE</a></option>
+                </select>
+            </div>
         </div>
+        
         <div class="x-container hide" onclick="toggleMenu(this)">
             <div class="bar1"></div>
             <div class="bar2"></div>
@@ -42,7 +46,8 @@
             </form>
             <div class="tags-flex flex">
                 <div class="tags-display feature btn input"></div>
-                <button class="btn more-btn feature" data-trans="More">More</button>
+                <!-- <button class="btn" onclick="onRandom()">Random</button> -->
+                <button class="btn more-btn feature" onclick="onRandom()" data-trans="Random">Random</button>
             </div>
         </div>
         <div class="imgs-container">
@@ -57,19 +62,18 @@
         <div class="meme-features">
             <input class="btn text-input input" type="text" oninput="onSetLineTxt(this.value)">
             <div class="text-setting border-radius">
-                <button class="btn move-btn" onclick="onMoveLineUp()">⇧</button>
-                <button class="btn move-btn" onclick="onMoveLineDown()">⇩</button>
-                <button class="btn switch-btn" onclick="onChangeLine()">⇧⇩</button>
+                <button class="btn move-btn" onclick="onMoveLineUp()"><i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+                <button class="btn move-btn" onclick="onMoveLineDown()"><i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+                <button class="btn switch-btn" onclick="onChangeLine()"><i class="fa fa-arrows-v" aria-hidden="true"></i></button>
                 <button class="btn add-btn" onclick="onAddLine()">╋</button>
-                <button class="btn remove-btn" onclick="onRemoveLine()">🗑</button>
-                <button class="btn remove-btn" onclick="onShareImg(false)">S</button>
+                <button class="btn remove-btn" onclick="onRemoveLine()"><i class="fa fa-trash" aria-hidden="true"></i></button>
             </div>
             <div class="text-featers border-radius">
                 <button class="btn text-btn" onclick="onChangeFontSize(+1)">A+</button>
                 <button class="btn text-btn" onclick="onChangeFontSize(-1)">A-</button>
-                <button class="btn text-btn" onclick="onAlignText('left')">⇽</button>
-                <button class="btn text-btn" onclick="onAlignText('center')">☵</button>
-                <button class="btn text-btn" onclick="onAlignText('right')">⇾</button>
+                <button class="btn text-btn" onclick="onAlignText('left')"><i class="fa fa-align-left" aria-hidden="true"></i></button>
+                <button class="btn text-btn" onclick="onAlignText('center')"><i class="fa fa-align-center" aria-hidden="true"></i></button>
+                <button class="btn text-btn" onclick="onAlignText('right')"><i class="fa fa-align-right" aria-hidden="true"></i></button>
                 <select class="btn text-btn font-btn" onchange="onChangeFont(this.value)">
                     <option value="impact">impact</option>
                     <option value="Arial">Arial</option>
@@ -87,8 +91,10 @@
             </div>
             <div class="smile-emoji border-radius flex"></div>
             <div class="down-up-load">
-                <a href="#" class="btn download flex" download="new-meme.jpg" onclick="downloadMeme(this)" data-trans="Download">Download</a>
-                <button class="btn share" onclick="onShareImg(true)" data-trans="Share">Share </button>
+                <a href="#" class="btn download flex" download="new-meme.jpg" onclick="downloadMeme(this)" data-trans="Download">
+                    <i class="fa fa-download" aria-hidden="true"></i>&nbsp; Download</a>
+                <button class="btn share" onclick="onShareImg(true)" data-trans="Share"><i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp;  Share </button>
+                <button class="btn save-btn" onclick="onShareImg(false)">💾</button>
                 <!-- <button class="btn sharee"  data-trans="Share">Sharee </button> -->
             </div>
         </div>

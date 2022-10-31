@@ -32,10 +32,11 @@ function renderMeme(lines, img) {
         onSwitchGallery(2)
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
         gCurrImg = img
-    } else gCtx.drawImage(gCurrImg, 0, 0, gElCanvas.width, gElCanvas.height)
+    } else if (gCurrImg) gCtx.drawImage(gCurrImg, 0, 0, gElCanvas.width, gElCanvas.height)
+    else return
 
     let memeIdx = getMeme().selectedLineIdx
-    let align
+    let align 
 
     lines.forEach((line, idx) => {
         
@@ -44,6 +45,9 @@ function renderMeme(lines, img) {
         else align = gElCanvas.width - 10
 
         if (line.url) {
+            if (line.align === 'center') align = gElCanvas.width / 2 - line.size / 2
+            if (line.align === 'right') align = gElCanvas.width - line.size
+            // gCtx.strokeRect(startrec, line.height - line.size - 10, (line.size * text.length / 2)  + 10, line.size + 25)
             return addSticker(line.id ,align)
         }
 
@@ -51,9 +55,17 @@ function renderMeme(lines, img) {
         gCtx.font = line.size + 'px ' + line.font
         gCtx.fillStyle = line.color
         gCtx.strokeStyle = line.sColor
-        console.log(text);
+        gCtx.textAlign  = line.align
+
+        let startrec
+        if (line.align === 'left') startrec = 5
+        else if (line.align === 'center') startrec =  250 - (line.size * text.length /4) 
+        if (line.align === 'right') startrec = 490 - (line.size * text.length /2) 
         
-        if (idx === memeIdx) gCtx.strokeRect(align - 10, line.height - line.size - 10, (line.size * text.length / 2)  + 10, line.size + 25)
+        if (idx === memeIdx){
+           gCtx.strokeRect(startrec, line.height - line.size - 10, (line.size * text.length / 2)  + 10, line.size + 25)
+           document.querySelector('.text-input').value = text
+        }
         gCtx.fillText(text, align, line.height)
         gCtx.strokeText(text, align, line.height)
     })
@@ -68,7 +80,7 @@ function renderStickers(){
 }
 
 function renderSticker(sticker, size , align){
-    gCtx.drawImage(sticker, align, size.height , size.size, size.size)
+    gCtx.drawImage(sticker,align, size.height , size.size, size.size)
 }
 
 function onSetLineTxt(text) {
@@ -109,7 +121,7 @@ function onRenderTags() {
     let tagsDisplay = document.querySelector('.tags-display')
     for (const tag in tags) {
         tagsDisplay.innerHTML += `<p onclick="onSearch(event, '${tag}')" class="${tag} word-search">${tag}</p>  &nbsp`
-        document.querySelector(`.${tag}`).style.fontSize = tags[tag] * 0.06 + 'em'
+        document.querySelector(`.${tag}`).style.fontSize = tags[tag] * 0.07 + 'em'
     }
 }
 
@@ -118,7 +130,7 @@ function onSearch(ev, tag) {
     if(!tag) var tag = document.querySelector('.search').value
     let tags = getSearchList()
     if (tags[tag] < 35) {
-        document.querySelector(`.${tag}`).style.fontSize = tags[tag] * 0.06 + 'em'
+        document.querySelector(`.${tag}`).style.fontSize = tags[tag] * 0.07 + 'em'
     }
     searchTag(tag)
 }
