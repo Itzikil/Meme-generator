@@ -8,12 +8,12 @@
 
 @font-face {
     font-family: Poppins;
-    src: url(/font/Poppins-Medium.ttf);
+    src: url(../font/Poppins-Medium.ttf);
 }
 
 @font-face {
     font-family: Poppins-light;
-    src: url(/font/Poppins-Light.ttf);
+    src: url(../font/Poppins-Light.ttf);
 }
 
 html {
